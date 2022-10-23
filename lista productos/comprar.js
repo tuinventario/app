@@ -36,6 +36,7 @@ function comprar() {
         </div>
       </div>
     </div>
+    
   );
 }
 export default comprar;
