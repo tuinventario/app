@@ -3,7 +3,7 @@ import './Product.css';
 import data from "../products.json";
 import Button from "react-bootstrap/Button";
 
-function Producto_compra() {
+function producto_compra() {
   const [products, setProducts] = useState(data);
   const [addFormData, setAddFormData] = useState({
     urlImagen: "",
@@ -38,5 +38,4 @@ function Producto_compra() {
     </div>
   );
 }
-export default Producto_compra;
-
+export default producto_compra;
