@@ -33,6 +33,9 @@ function Layout() {
                 <div class="navbar-nav mx-auto bg-light pe-4 py-3 py-lg-0">
                     <a href="/" class="nav-item nav-link active">Inicio</a>
                     <a class="nav-item nav-link" href="/product" >Productos</a>
+                    <a class="nav-item nav-link" href="/shopping" >Carrito</a>
+                    <a class="nav-item nav-link" href="/sales" >Ventas</a>
+                    <a class="nav-item nav-link" href="/productBuy" >Comprar</a>
                     <a class="nav-item nav-link"  href="index.html">Cerrar</a>
                 </div>
             </div>
