@@ -10,6 +10,7 @@ import Product from './components/Product';
 import Layout from './components/Layout';
 import Shopping from './components/Shopping';
 import Sales from './components/Sales';
+import ProductBuy from './components/ProductBuy';
 //componente
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -22,6 +23,7 @@ root.render(
         <Route path='/product'  element={<Product />}/>
         <Route path='/shopping'  element={<Shopping />}/>
         <Route path='/sales'  element={<Sales />}/>
+        <Route path='/productBuy'  element={<ProductBuy />}/>
       </Routes>
       <Footer/>
     </Router>

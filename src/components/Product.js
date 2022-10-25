@@ -3,14 +3,8 @@ import './Product.css';
 import data from "../products.json";
 
 function Product() {
-  const [products, setProducts] = useState(data);
-  const [addFormData, setAddFormData] = useState({
-    urlImagen: "",
-    nombre: "",
-    descripcion: "",
-    caracteristicas: "",
-    precio:""
-  });
+  const [products] = useState(data);
+  
 
   return (
     <div class="container-fluid p-0 mb-5" >
@@ -24,6 +18,7 @@ function Product() {
                   <img className='icon'  alt={p.nombre} src={p.urlImagen}/>
                   <span>{p.nombre}</span>
                   <span>$ {p.precio}</span>
+                  <span>Stock {p.cantidad}</span>
                 </div>
               ))}
             </div>
