@@ -36,6 +36,7 @@ function Layout() {
                     <a class="nav-item nav-link" href="/shopping" >Carrito</a>
                     <a class="nav-item nav-link" href="/sales" >Ventas</a>
                     <a class="nav-item nav-link" href="/productBuy" >Comprar</a>
+                    <a class="nav-item nav-link" href="/editProduct" >Crear Producto</a>
                     <a class="nav-item nav-link"  href="index.html">Cerrar</a>
                 </div>
             </div>
