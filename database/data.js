@@ -19,18 +19,5 @@ MongoClient.connect(url, function(err, db) {
         console.log("Sale created!");
         db.close();
     });
-    var myobj = { 
-        id: "GGOEAFKA087499",
-        urlImagen: "https://i.blogs.es/27b569/telefono/450_1000.jpeg",
-        nombre: "Android Small Removable Sticker Sheet",
-        descripcion: "Show your Android pride by placing these 8 fun stickers on your technology products or accessories!",
-        caracteristicas: "<p>8 Android stickers</p>\n<p>White colored sticker sheet</p>",
-        precio: "2.99",
-        cantidad:"3"
-    };
-    dbo.collection("Product").insertOne(myobj, function(e,r){
-        if (e) throw e;
-        console.log("product insert")
-       
-    });
+   
 });
