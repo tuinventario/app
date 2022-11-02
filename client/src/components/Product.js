@@ -1,11 +1,18 @@
 import React, { useState } from "react";
+import axios from "axios";
 import './Product.css';
 import data from "../products.json";
 
 function Product() {
-  const [products] = useState(data);
-  
-
+  const [products, setProduct] = useState(data);
+  axios.get("http://localhost:5000/api/product")
+    .then((res) => {
+      console.log(res)
+    setProduct(res.data)
+    }) 
+    .catch((err) =>
+      console.log(err)
+    );
   return (
     <div class="container-fluid p-0 mb-5" >
       <div class="text-center hero my-5 p position-relative" >
