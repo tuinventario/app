@@ -1,10 +1,9 @@
 import React, { useState  } from "react";
 import Message from "./Message";
-import data from "../products.json";
+import axios from "axios";
 import ListProduct from "./ListProduct";
 function EditProduct() {
   var [show, setShow] =  useState(false);
-  const [products] = useState(data);
   var [select,setSelect] =  useState({
     id: "",
     urlImagen: "",
@@ -17,6 +16,20 @@ function EditProduct() {
   });
   var children="Se ha agregado correctamente";
   var showModal = () => {
+    var elements = document.getElementById("form").elements;
+    var obj ={};
+    for(var i = 0 ; i < elements.length ; i++){
+        var item = elements.item(i);
+        obj[item.name] = item.value;
+    }
+    console.log(obj)
+    axios
+    .post('/api/product/Create', obj)
+    .then(() => {
+      console.log('Book Created')})
+    .catch(err => {
+      console.error(err);
+    });
     document.getElementById("form").reset();
     setSelect({
         id: "",
@@ -35,7 +48,14 @@ function EditProduct() {
     setShow(false);
   }
   var selectData = (e) => {
-    setSelect(products.find(({ id }) => id === e.target.id))
+    axios.get("/api/product/ById/"+e.target.id)
+    .then((res) => {
+      setSelect(res.data[0])
+    }) 
+    .catch((err) =>
+      console.log(err)
+    );
+    //setSelect(products.find(({ id }) => id === e.target.id))
   }
   return (
     <div class="container-fluid p-0 mb-5" >
@@ -49,6 +69,9 @@ function EditProduct() {
           </div>    
           <div class="col-9">
           <form method="POST" id="form">
+          <input type="hidden" class="form-control" field="id" name="id" value={select.id} />
+          <input type="hidden" class="form-control" field="urlImagen" name="urlImagen" value={select.urlImagen} />
+              
           <table class="table  text-white">
             <tbody>
             <tr>

@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import './Product.css';
-import data from "../products.json";
-
 function Product() {
-  const [products, setProduct] = useState(data);
+  const [products, setProduct] = useState([]);
   axios.get("http://localhost:5000/api/product")
     .then((res) => {
       console.log(res)

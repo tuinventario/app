@@ -1,9 +1,15 @@
 import React,{ useState  } from "react";
+import axios from "axios";
 import './Product.css';
-import data from "../products.json";
 const ListProduct = ({ selectData }) => {
-  const [products] = useState(data);
- 
+  const [products,setProduct] = useState([]);
+  axios.get("/api/product")
+  .then((res) => {
+    setProduct(res.data)
+  }) 
+  .catch((err) =>
+    console.log(err)
+  );
   return (
     
     <div className='card text-dark'>
