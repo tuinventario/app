@@ -17,36 +17,48 @@ router.get("/ById/:id", function(req, res) {
    
 });
 router.post("/Create", function(req, res) {
-    
     var pro={};
-    product.find({id:req.body.id}, function(err, p){
-        pro=p; 
-        if(p= null){
-            console.log(p)
-            pro = new product({
-                id: req.body.id,
-                urlImagen: req.body.urlImagen,
-                nombre:req.body.nombre,
-                descripcion:req.body.descripcion,
-                caracteristicas:req.body.caracteristicas,
-                precio:req.body.precio,
-                cantidad:req.body.cantidad
-            })
-            pro.save()
+    pro = new product({
+        id: req.body.id!=""?req.body.id:new Date().getTime().toString(),
+        urlImagen: req.body.urlImagen!=""?req.body.urlImagen:"default",
+        nombre:req.body.nombre,
+        descripcion:req.body.descripcion,
+        caracteristicas:req.body.id != ""?"Producto actualizado":"Producto nuevo",
+        precio:req.body.precio,
+        cantidad:req.body.cantidad
+    })
+    if(req.body.id != ""){
+        try{
+        product.findOneAndUpdate({id:req.body.id}, 
+            {
+                $set: { 
+                    urlImagen: req.body.urlImagen!=""?req.body.urlImagen:"default",
+                    nombre:req.body.nombre,
+                    descripcion:req.body.descripcion,
+                    caracteristicas:req.body.id != ""?"Producto actualizado":"Producto nuevo",
+                    precio:req.body.precio,
+                    cantidad:req.body.cantidad
+                } 
+            },
+            function (err, docs) { 
+                if (err){ 
+                    console.log(err) 
+                } 
+                else{ 
+                    console.log("Updated product : ", docs); 
+                } 
+
+        });
         }
-    else{
-        
-        pro.id= req.body.id;
-        pro.urlImagen= req.body.urlImagen;
-        pro.nombre=req.body.nombre;
-        pro.descripcion=req.body.descripcion;
-        pro.caracteristicas=req.body.caracteristicas;
-        pro.precio=req.body.precio;
-        pro.cantidad=req.body.cantidad;
-        product.update(pro);
-        
+        catch (e) {
+            console.log(e);
+         }
+    }
+    else
+    {
+        console.log("aqui")
+        pro.save()
     }
     res.send(pro)
-    })
 });
 module.exports = router;

@@ -26,7 +26,7 @@ function EditProduct() {
     axios
     .post('/api/product/Create', obj)
     .then(() => {
-      console.log('Book Created')})
+      console.log('product Created')})
     .catch(err => {
       console.error(err);
     });
@@ -43,7 +43,9 @@ function EditProduct() {
       })
     setShow(true);
   }
-  
+  const handleChange = (e) => {
+    setSelect({ ...select, [e.target.name]: e.target.value });
+  };
   var hideModal = () => {
     setShow(false);
   }
@@ -79,7 +81,7 @@ function EditProduct() {
                 Nombre
               </td>
               <td>
-                <input type="text" class="form-control" field="nombre" name="nombre" value={select.nombre} />
+                <input type="text" class="form-control" field="nombre" name="nombre" value={select.nombre}  onChange={handleChange} />
               </td>
             </tr>
             <tr>
@@ -87,7 +89,7 @@ function EditProduct() {
                 Descripcion
               </td>
               <td>
-                <input type="text" class="form-control" field="descripcion" name="descripcion"   value={select.descripcion}  />
+                <input type="text" class="form-control" field="descripcion" name="descripcion"   value={select.descripcion}  onChange={handleChange}  />
               </td>
             </tr>
             <tr>
@@ -95,7 +97,7 @@ function EditProduct() {
                 Precio
               </td>
               <td>
-                <input type="number" class="form-control" field="precio" name="precio"  value={select.precio}  />
+                <input type="number" class="form-control" field="precio" name="precio"  value={select.precio}   onChange={handleChange}/>
               </td>
             </tr>
             <tr>
@@ -103,12 +105,12 @@ function EditProduct() {
                 Stock
               </td>
               <td>
-                <input type="number" class="form-control" field="cantidad"   name="cantidad"  value={select.cantidad}  />
+                <input type="number" class="form-control" field="cantidad"   name="cantidad"  value={select.cantidad}  onChange={handleChange} />
               </td>
             </tr>
             <tr>
               <td colspan="2" class="text-center">
-                <input class="btn btn-primary" type="button" value="Guardar" onClick={showModal}/>
+                <input class="btn btn-primary" type="button" value="Guardar" onClick={showModal} />
 
               </td>
             </tr>
