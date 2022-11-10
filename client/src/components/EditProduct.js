@@ -1,10 +1,9 @@
 import React, { useState  } from "react";
 import Message from "./Message";
-import data from "../products.json";
+import axios from "axios";
 import ListProduct from "./ListProduct";
 function EditProduct() {
   var [show, setShow] =  useState(false);
-  const [products] = useState(data);
   var [select,setSelect] =  useState({
     id: "",
     urlImagen: "",
@@ -17,6 +16,20 @@ function EditProduct() {
   });
   var children="Se ha agregado correctamente";
   var showModal = () => {
+    var elements = document.getElementById("form").elements;
+    var obj ={};
+    for(var i = 0 ; i < elements.length ; i++){
+        var item = elements.item(i);
+        obj[item.name] = item.value;
+    }
+    console.log(obj)
+    axios
+    .post('/api/product/Create', obj)
+    .then(() => {
+      console.log('product Created')})
+    .catch(err => {
+      console.error(err);
+    });
     document.getElementById("form").reset();
     setSelect({
         id: "",
@@ -30,12 +43,21 @@ function EditProduct() {
       })
     setShow(true);
   }
-  
+  const handleChange = (e) => {
+    setSelect({ ...select, [e.target.name]: e.target.value });
+  };
   var hideModal = () => {
     setShow(false);
   }
   var selectData = (e) => {
-    setSelect(products.find(({ id }) => id === e.target.id))
+    axios.get("/api/product/ById/"+e.target.id)
+    .then((res) => {
+      setSelect(res.data[0])
+    }) 
+    .catch((err) =>
+      console.log(err)
+    );
+    //setSelect(products.find(({ id }) => id === e.target.id))
   }
   return (
     <div class="container-fluid p-0 mb-5" >
@@ -49,6 +71,9 @@ function EditProduct() {
           </div>    
           <div class="col-9">
           <form method="POST" id="form">
+          <input type="hidden" class="form-control" field="id" name="id" value={select.id} />
+          <input type="hidden" class="form-control" field="urlImagen" name="urlImagen" value={select.urlImagen} />
+              
           <table class="table  text-white">
             <tbody>
             <tr>
@@ -56,7 +81,7 @@ function EditProduct() {
                 Nombre
               </td>
               <td>
-                <input type="text" class="form-control" field="nombre" name="nombre" value={select.nombre} />
+                <input type="text" class="form-control" field="nombre" name="nombre" value={select.nombre}  onChange={handleChange} />
               </td>
             </tr>
             <tr>
@@ -64,7 +89,7 @@ function EditProduct() {
                 Descripcion
               </td>
               <td>
-                <input type="text" class="form-control" field="descripcion" name="descripcion"   value={select.descripcion}  />
+                <input type="text" class="form-control" field="descripcion" name="descripcion"   value={select.descripcion}  onChange={handleChange}  />
               </td>
             </tr>
             <tr>
@@ -72,7 +97,7 @@ function EditProduct() {
                 Precio
               </td>
               <td>
-                <input type="number" class="form-control" field="precio" name="precio"  value={select.precio}  />
+                <input type="number" class="form-control" field="precio" name="precio"  value={select.precio}   onChange={handleChange}/>
               </td>
             </tr>
             <tr>
@@ -80,12 +105,12 @@ function EditProduct() {
                 Stock
               </td>
               <td>
-                <input type="number" class="form-control" field="cantidad"   name="cantidad"  value={select.cantidad}  />
+                <input type="number" class="form-control" field="cantidad"   name="cantidad"  value={select.cantidad}  onChange={handleChange} />
               </td>
             </tr>
             <tr>
               <td colspan="2" class="text-center">
-                <input class="btn btn-primary" type="button" value="Guardar" onClick={showModal}/>
+                <input class="btn btn-primary" type="button" value="Guardar" onClick={showModal} />
 
               </td>
             </tr>
