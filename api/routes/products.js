@@ -56,7 +56,6 @@ router.post("/Create", function(req, res) {
     }
     else
     {
-        console.log("aqui")
         pro.save()
     }
     res.send(pro)
