@@ -10,17 +10,19 @@ router.get("/", function(req, res) {
     })
    
 });
+
 router.get("/ById/:id", function(req, res) {
     product.find({id:req.params.id}, function(err, p){
         res.send(p)
     })
    
 });
+
 router.post("/Create", function(req, res) {
     var pro={};
     pro = new product({
         id: req.body.id!=""?req.body.id:new Date().getTime().toString(),
-        urlImagen: req.body.urlImagen!=""?req.body.urlImagen:"default",
+        urlImagen: req.body.urlImagen!=""?req.body.urlImagen:"https://mockupgratis.com/wp-content/uploads/2019/07/Mockup_Identidad_Corporativa_Papeleria_mockupgratis.com_-1024x683.jpg",
         nombre:req.body.nombre,
         descripcion:req.body.descripcion,
         caracteristicas:req.body.id != ""?"Producto actualizado":"Producto nuevo",
