@@ -3,7 +3,7 @@ import axios from "axios";
 import './Product.css';
 function Product() {
   const [products, setProduct] = useState([]);
-  axios.get("http://localhost:5000/api/product")
+  axios.get("/api/product")
     .then((res) => {
       console.log(res)
     setProduct(res.data)
