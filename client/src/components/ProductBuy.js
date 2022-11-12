@@ -28,7 +28,7 @@ function ProductBuy() {
       else{
         detail.push(res.data[0]);
       }
-      if(detail.filter(element => element.id === e.target.id) == null){
+      if(detail.filter(element => element.id === e.target.id)){
         detail.push(res.data[0]);
       }
       else{
