@@ -1,5 +1,19 @@
-function Layout() {
- return (
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { logoutUser } from "../actions/authActions";
+class Layout extends Component{
+   
+    onLogoutClick = e => {
+        e.preventDefault();
+        this.props.logoutUser();
+        window.location.href = "/";
+      };
+render (){
+  
+    const { user } = this.props.auth;
+    console.log(user.name)
+    return (
     <div>
         <div class="container-fluid bg-dark text-white-50 py-2 px-0 d-none d-lg-block">
             <div class="row gx-0 align-items-center">
@@ -32,16 +46,44 @@ function Layout() {
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav mx-auto bg-light pe-4 py-3 py-lg-0">
                     <a href="/" class="nav-item nav-link active">Inicio</a>
+                    {!user.name &&
+                    <a href="/Login" class="nav-item nav-link active">Login</a>
+                    }
+                    {user.name &&
                     <a class="nav-item nav-link" href="/product" >Productos</a>
+                    }
+                    {user.name &&
                     <a class="nav-item nav-link" href="/shopping" >Carrito</a>
+                }
+                    {user.name &&
                     <a class="nav-item nav-link" href="/sales" >Ventas</a>
+                }
+                    {user.name &&
                     <a class="nav-item nav-link" href="/productBuy" >Comprar</a>
+                }
+                    {user.name &&
                     <a class="nav-item nav-link" href="/editProduct" >Crear Producto</a>
-                    <a class="nav-item nav-link"  href="index.html">Cerrar</a>
+                }
+                    {user.name &&
+                    <a class="nav-item nav-link"  href="/" onClick={this.onLogoutClick}>Cerrar</a>
+                }
+                  
+                   
                 </div>
             </div>
         </nav>
     </div>
- ) 
+    );
 }
-export default Layout;
+}
+Layout.propTypes = {
+    logoutUser: PropTypes.func.isRequired,
+    auth: PropTypes.object.isRequired
+  };
+  const mapStateToProps = state => ({
+    auth: state.auth
+  });
+  export default connect(
+    mapStateToProps,
+    { logoutUser }
+  )(Layout);

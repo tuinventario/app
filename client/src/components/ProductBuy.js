@@ -5,7 +5,6 @@ import axios from "axios";
 function ProductBuy() {
   var [products, setProduct] = useState([]);
   var [show, setShow] =  useState(false);
-  var [select,setSelect] =  useState({});
   axios.get("/api/product")
   .then((res) => {
   setProduct(res.data.filter(element => element.cantidad > 0))
@@ -18,7 +17,7 @@ function ProductBuy() {
     axios.get("/api/product/ById/"+e.target.id)
     .then((res) => {
       res.data[0].cantidadOrden=document.getElementById("select"+e.target.id).value
-      setSelect(res.data[0])
+      
       console.log()
       var detail = [];
       console.log(localStorage.getItem("products"))
@@ -28,12 +27,13 @@ function ProductBuy() {
       else{
         detail.push(res.data[0]);
       }
-      if(detail.filter(element => element.id === e.target.id)){
-        detail.push(res.data[0]);
-      }
-      else{
+      if(detail.filter(element => element.id === e.target.id).length > 0){
         var objIndex = detail.findIndex((obj => obj.id === e.target.id));
         detail[objIndex] =res.data[0];
+       
+      }
+      else{
+        detail.push(res.data[0]);
       }
       localStorage.setItem("products", JSON.stringify(detail));
       setShow(true);
