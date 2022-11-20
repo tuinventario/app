@@ -1,6 +1,6 @@
 
 var MongoClient = require('mongodb').MongoClient;
-var url = "mongodb://localhost:27017/";
+var url = "mongodb+srv://admin:aseder324@cluster0.bjg0rqa.mongodb.net";
 MongoClient.connect(url, function(err, db) {
     if (err) throw err;
     var dbo= db.db("mydb");
@@ -17,6 +17,11 @@ MongoClient.connect(url, function(err, db) {
     dbo.createCollection("Sale", function(err, res){
         if (err) throw err;
         console.log("Sale created!");
+        db.close();
+    });
+    dbo.createCollection("DetailSale", function(err, res){
+        if (err) throw err;
+        console.log("DetailSale created!");
         db.close();
     });
     var myobj = { 
