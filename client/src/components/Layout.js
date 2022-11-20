@@ -46,22 +46,22 @@ render (){
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav mx-auto bg-light pe-4 py-3 py-lg-0">
                     <a href="/" class="nav-item nav-link active">Inicio</a>
-                    {!user.name &&
+                    {(!user.name) &&
                     <a href="/Login" class="nav-item nav-link active">Login</a>
                     }
-                    {user.name &&
+                    {(user.name && user.rol==="administrador") &&
                     <a class="nav-item nav-link" href="/product" >Productos</a>
                     }
-                    {user.name &&
+                    {(user.name  && user.rol==="cliente") &&
                     <a class="nav-item nav-link" href="/shopping" >Carrito</a>
                 }
-                    {user.name &&
+                    {(user.name && user.rol==="administrador") &&
                     <a class="nav-item nav-link" href="/sales" >Ventas</a>
                 }
-                    {user.name &&
+                    {(user.name  && user.rol==="cliente") &&
                     <a class="nav-item nav-link" href="/productBuy" >Comprar</a>
                 }
-                    {user.name &&
+                    {(user.name  && user.rol==="administrador") &&
                     <a class="nav-item nav-link" href="/editProduct" >Crear Producto</a>
                 }
                     {user.name &&

@@ -1,8 +1,9 @@
-import React,{ useState  } from "react";
+import React,{ useState, useEffect } from "react";
 import axios from "axios";
 import './Product.css';
 const ListProduct = ({ selectData }) => {
   const [products,setProduct] = useState([]);
+  useEffect(() =>{
   axios.get("https://nodepapeleria.herokuapp.com/api/product")
   .then((res) => {
     setProduct(res.data)
@@ -10,6 +11,7 @@ const ListProduct = ({ selectData }) => {
   .catch((err) =>
     console.log(err)
   );
+  });
   return (
     
     <div className='card text-dark'>

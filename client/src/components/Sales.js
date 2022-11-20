@@ -1,9 +1,10 @@
 import './Sales.css';
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import axios from "axios";
 
 function Sales(){
     const [products, setProduct] = useState([]);
+    useEffect(() =>{
   axios.get("https://nodepapeleria.herokuapp.com/api/Sale")
     .then((res) => {
       console.log(res)
@@ -12,6 +13,7 @@ function Sales(){
     .catch((err) =>
       console.log(err)
     );
+  });
     return(
         <div class="container-fluid p-0 mb-5" >
         <div class="text-center hero my-5 p position-relative" >
