@@ -6,8 +6,8 @@ let errors = {};
 data.name = !isEmpty(data.name) ? data.name : "";
 data.email = !isEmpty(data.email) ? data.email : "";
 data.password = !isEmpty(data.password) ? data.password: "";
-data.password2 = !isEmpty(data.password2) ?
-data.password2 : "";
+data.password2 = !isEmpty(data.password2) ?data.password2 : "";
+data.rol = !isEmpty(data.rol) ?data.rol : "";
 // Name checks
 if (Validator.isEmpty(data.name)) {
 errors.name = "Name field is required";
@@ -32,6 +32,9 @@ errors.password = "Password must be at least 6 characters";
 if (!Validator.equals(data.password, data.password2)) {
 errors.password2 = "Passwords must match";
 }
+if (Validator.isEmpty(data.rol)) {
+    errors.password2 = "Rol field is required";
+    }
 return {
 errors,
 isValid: isEmpty(errors)
