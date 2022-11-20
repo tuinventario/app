@@ -1,10 +1,11 @@
-import React, { useState  } from "react";
+import React, { useState,useEffect  } from "react";
 import './Product.css';
 import Message from "./Message";
 import axios from "axios";
 function ProductBuy() {
   var [products, setProduct] = useState([]);
   var [show, setShow] =  useState(false);
+  useEffect(() => {
   axios.get("https://nodepapeleria.herokuapp.com/api/product")
   .then((res) => {
   setProduct(res.data.filter(element => element.cantidad > 0))
@@ -12,6 +13,7 @@ function ProductBuy() {
   .catch((err) =>
     console.log(err)
   );
+  });
   var children="Se ha agregado correctamente";
   var showModal = (e) => {
     axios.get("https://nodepapeleria.herokuapp.com/api/product/ById/"+e.target.id)

@@ -12,6 +12,7 @@ name: "",
 email: "",
 password: "",
 password2: "",
+rol:"",
 errors: {}
 };
 }
@@ -37,7 +38,8 @@ const newUser = {
 name: this.state.name,
 email: this.state.email,
 password: this.state.password,
-password2: this.state.password2
+password2: this.state.password2,
+rol:this.state.rol
 };
 console.log(newUser);
 this.props.registerUser(newUser, this.props.history); 
@@ -91,7 +93,7 @@ className={classnames("form-control ", {invalid: errors.email})}
 <span className="text-danger">{errors.email}</span>
 </div>
 <div className="input-field col-12">
-<input c
+<input 
 onChange={this.onChange}
 value={this.state.password}
 error={errors.password}
@@ -118,6 +120,21 @@ className={classnames("form-control ", {invalid: errors.password2})}
 <br/>
 <span className="text-danger">{errors.password2}</span>
 </div>
+<div className="input-field col-12">
+<select 
+onChange={this.onChange}
+value={this.state.rol}
+id="rol"
+className={classnames("form-control ", {invalid: errors.rol})}
+>
+<option value="">seleccione un valor</option>
+  <option value="administrador">administrador</option>
+  <option value="cliente">cliente</option>
+</select>
+<label htmlFor="rol">rol</label>
+
+</div>
+
 <div className="col-12" style={{ paddingLeft: "11.250px" }}>
 <button
 style={{
