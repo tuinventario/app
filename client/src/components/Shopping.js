@@ -27,7 +27,7 @@ function Shopping() {
             valor:tol.toString(),
             confirmado:"true"
         }
-        axios.post("/api/Sale/Create",sale)
+        axios.post("https://nodepapeleria.herokuapp.com/api/Sale/Create",sale)
         .then((res) => {
             if(res.data.idVenta != null){
                 var deta=[]
@@ -41,7 +41,7 @@ function Shopping() {
                     }
                     deta.push(d);
                     product[i].cantidad=(parseInt(product[i].cantidad)-parseInt(product[i].cantidadOrden)).toString()
-                    axios.post("/api/product/Create",product[i])
+                    axios.post("https://nodepapeleria.herokuapp.com/api/product/Create",product[i])
                     .then((rep) => {
                         console.log(rep)
                     }) 
@@ -52,7 +52,7 @@ function Shopping() {
                 }
                 if(deta.length > 0){
                     console.log(deta)
-                    axios.post("/api/DetailSale/CreateAll",deta)
+                    axios.post("https://nodepapeleria.herokuapp.com/api/DetailSale/CreateAll",deta)
                     .then((rep) => {
                         console.log(rep)
                         localStorage.removeItem('products');

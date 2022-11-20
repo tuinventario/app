@@ -24,7 +24,7 @@ function EditProduct() {
     }
     console.log(obj)
     axios
-    .post('/api/product/Create', obj)
+    .post('https://nodepapeleria.herokuapp.com/api/product/Create', obj)
     .then(() => {
       console.log('product Created')})
     .catch(err => {
@@ -50,7 +50,7 @@ function EditProduct() {
     setShow(false);
   }
   var selectData = (e) => {
-    axios.get("/api/product/ById/"+e.target.id)
+    axios.get("https://nodepapeleria.herokuapp.com/api/product/ById/"+e.target.id)
     .then((res) => {
       setSelect(res.data[0])
     }) 

@@ -4,7 +4,7 @@ import axios from "axios";
 
 function Sales(){
     const [products, setProduct] = useState([]);
-  axios.get("/api/Sale")
+  axios.get("https://nodepapeleria.herokuapp.com/api/Sale")
     .then((res) => {
       console.log(res)
     setProduct(res.data)
