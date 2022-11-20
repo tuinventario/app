@@ -1,10 +1,10 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-const products = require("./routes/products");
-const sales = require("./routes/sales");
-const detailSales = require("./routes/detailSale");
-const client = require("./routes/client");
+const products = require("./products");
+const sales = require("./sales");
+const detailSales = require("./detailSale");
+const client = require("./client");
 const passport = require("passport");
 const cors = require("cors")
 const app = express();
@@ -15,7 +15,7 @@ app.use(
 );
 app.use(bodyParser.json());
 // DB Config
-const db = require("./config/keys").mongoURI;
+const db = require("./keys").mongoURI;
 // Connect to MongoDB
 mongoose.connect(
     db,
@@ -31,7 +31,7 @@ app.use("/api/DetailSale", detailSales);
 // Passport middleware
 app.use(passport.initialize());
 // Passport config
-require("./routes/passport")(passport);
+require("./passport")(passport);
 // Routes
 app.use("/api/client", client);
 const port = process.env.PORT || 5000;

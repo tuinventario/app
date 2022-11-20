@@ -5,7 +5,7 @@ import axios from "axios";
 function ProductBuy() {
   var [products, setProduct] = useState([]);
   var [show, setShow] =  useState(false);
-  axios.get("/api/product")
+  axios.get("https://nodepapeleria.herokuapp.com/api/product")
   .then((res) => {
   setProduct(res.data.filter(element => element.cantidad > 0))
   }) 
@@ -14,7 +14,7 @@ function ProductBuy() {
   );
   var children="Se ha agregado correctamente";
   var showModal = (e) => {
-    axios.get("/api/product/ById/"+e.target.id)
+    axios.get("https://nodepapeleria.herokuapp.com/api/product/ById/"+e.target.id)
     .then((res) => {
       res.data[0].cantidadOrden=document.getElementById("select"+e.target.id).value
       

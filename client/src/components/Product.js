@@ -3,7 +3,7 @@ import axios from "axios";
 import './Product.css';
 function Product() {
   const [products, setProduct] = useState([]);
-  axios.get("/api/product")
+  axios.get("https://nodepapeleria.herokuapp.com/api/product")
     .then((res) => {
       console.log(res)
     setProduct(res.data)

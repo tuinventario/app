@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const keys = require("../config/keys");
+const keys = require("./keys");
 
 // Load model
-const sales = require("../models/SalesModel");
+const sales = require("./salesModel");
 router.get("/", function(req, res) {
     sales.find({}, function(err, p){
         res.send(p)
